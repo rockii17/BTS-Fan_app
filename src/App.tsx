@@ -1,379 +1,186 @@
-import React, { useState, useEffect } from 'react';
-
-interface Song {
-  title: string;
-  album: string;
-  year: string;
-}
-
-interface Member {
-  name: string;
-  stageName: string;
-  role: string;
-  birthDate: string;
-  bio: string;
-}
-
-const MEMBERS: Member[] = [
-  {
-    name: 'Kim Nam-joon',
-    stageName: 'RM',
-    role: 'Leader, Main Rapper',
-    birthDate: 'September 12, 1994',
-    bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.',
-  },
-  {
-    name: 'Kim Seok-jin',
-    stageName: 'Jin',
-    role: 'Sub Vocalist, Visual',
-    birthDate: 'December 4, 1992',
-    bio: 'The oldest member, famous for his "World Wide Handsome" humor and soulful vocals.',
-  },
-  {
-    name: 'Min Yoon-gi',
-    stageName: 'Suga / Agust D',
-    role: 'Lead Rapper',
-    birthDate: 'March 9, 1993',
-    bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.',
-  },
-  {
-    name: 'Jung Ho-seok',
-    stageName: 'J-Hope',
-    role: 'Main Dancer, Sub Rapper',
-    birthDate: 'February 18, 1994',
-    bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.',
-  },
-  {
-    name: 'Park Ji-min',
-    stageName: 'Jimin',
-    role: 'Main Dancer, Lead Vocalist',
-    birthDate: 'October 13, 1995',
-    bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.',
-  },
-  {
-    name: 'Kim Tae-hyung',
-    stageName: 'V',
-    role: 'Lead Dancer, Sub Vocalist, Visual',
-    birthDate: 'December 30, 1995',
-    bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.',
-  },
-  {
-    name: 'Jeon Jung-kook',
-    stageName: 'Jungkook',
-    role: 'Main Vocalist, Lead Dancer, Center',
-    birthDate: 'September 1, 1997',
-    bio: 'The "Golden Maknae" who excels at singing, dancing, producing, and visuals.',
-  },
-];
-
-const DISCOGRAPHY: Song[] = [
-  { title: 'Dynamite', album: 'BE / Deluxe', year: '2020' },
-  { title: 'Butter', album: 'Butter (Single)', year: '2021' },
-  { title: 'Spring Day', album: 'YOU NEVER WALK ALONE', year: '2017' },
-  {
-    title: 'Boy With Luv (feat. Halsey)',
-    album: 'MAP OF THE SOUL : PERSONA',
-    year: '2019',
-  },
-  { title: 'Blood Sweat & Tears', album: 'WINGS', year: '2016' },
-  { title: 'Life Goes On', album: 'BE', year: '2020' },
-  { title: 'Fake Love', album: 'LOVE YOURSELF 轉 Tear', year: '2018' },
-  { title: 'DNA', album: 'LOVE YOURSELF 承 Her', year: '2017' },
-  {
-    title: 'Mic Drop (Steve Aoki Remix)',
-    album: 'LOVE YOURSELF 結 Answer',
-    year: '2017',
-  },
-  { title: 'Run BTS', album: 'Proof', year: '2022' },
-];
+import React, { useState } from 'react';
+import { Users, Music, Image, Tv, Newspaper, Heart, Sparkles } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'members' | 'songs' | 'favorites'>(
-    'members'
-  );
+  const [activeTab, setActiveTab] = useState<'members' | 'songs' | 'pictures' | 'videos' | 'news' | 'favorites'>('members');
 
-  // Favorites saved in LocalStorage
-  const [favoriteSongs, setFavoriteSongs] = useState<string[]>(() => {
-    const saved = localStorage.getItem('bts_fav_songs');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const members = [
+    { name: 'RM (Kim Namjoon)', role: 'Leader, Main Rapper', bio: 'The visionary leader and lyricist behind many of BTS’s hit tracks.' },
+    { name: 'Jin (Kim Seokjin)', role: 'Sub-Vocalist, Visual', bio: 'Known for his incredible vocals, charm, and "Worldwide Handsome" title.' },
+    { name: 'SUGA (Min Yoongi)', role: 'Lead Rapper, Producer', bio: 'Master producer and sharp rapper who creates deep, emotive tracks.' },
+    { name: 'j-hope (Jung Hoseok)', role: 'Main Dancer, Lead Rapper', bio: 'The bright energy and main choreography backbone of the group.' },
+    { name: 'Jimin (Park Jimin)', role: 'Main Dancer, Lead Vocalist', bio: 'Famous for his graceful contemporary dance style and unique vocal range.' },
+    { name: 'V (Kim Taehyung)', role: 'Sub-Vocalist, Visual', bio: 'Deep soulful voice with expressive stage presence and artistic flair.' },
+    { name: 'Jung Kook (Jeon Jungkook)', role: 'Main Vocalist, Lead Dancer, Center', bio: 'The "Golden Maknae" who excels at singing, dancing, and performing.' }
+  ];
 
-  useEffect(() => {
-    localStorage.setItem('bts_fav_songs', JSON.stringify(favoriteSongs));
-  }, [favoriteSongs]);
+  const songs = [
+    { title: 'Dynamite', genre: 'Disco-Pop', year: '2020' },
+    { title: 'Butter', genre: 'Dance-Pop', year: '2021' },
+    { title: 'Boy With Luv (feat. Halsey)', genre: 'Nu-Disco', year: '2019' },
+    { title: 'Spring Day', genre: 'Alternative Hip-Hop / Rock', year: '2017' },
+    { title: 'FAKE LOVE', genre: 'Emo Hip-Hop', year: '2018' },
+    { title: 'Blood Sweat & Tears', genre: 'Moombahton / Tropical House', year: '2016' },
+    { title: 'MIC Drop (Steve Aoki Remix)', genre: 'Trap / Hip-Hop', year: '2017' },
+    { title: 'Run BTS', genre: 'Upbeat Rock / Hip-Hop', year: '2022' }
+  ];
 
-  const toggleFavorite = (songTitle: string) => {
-    if (favoriteSongs.includes(songTitle)) {
-      setFavoriteSongs(favoriteSongs.filter((t) => t !== songTitle));
-    } else {
-      setFavoriteSongs([...favoriteSongs, songTitle]);
-    }
-  };
+  const pictures = [
+    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop'
+  ];
+
+  const videoIds = ['gdZLi9oWNZg', 'WMweEpGlu_U'];
+
+  const news = [
+    { title: 'ARIRANG World Tour in Full Swing', date: '2026', summary: 'BTS is headlining their massive ARIRANG World Tour following their return from military service.' },
+    { title: 'Album Streams Record', date: '2026', summary: 'Their album reached over 4 billion streams on Spotify, marking another major global milestone.' }
+  ];
+
+  const favorites = [
+    { title: 'Fan Anthems', items: 'Mikrokosmos, Spring Day, Magic Shop, 2! 3!' },
+    { title: 'Group Catchphrase', items: 'Borahae ("I Purple You" 💜)' },
+    { title: 'Solo Highlights', items: 'RM: Mono / Jin: Epiphany / SUGA: Daechwita / j-hope: Daydream / Jimin: Like Crazy / V: Slow Dancing / Jung Kook: Seven' }
+  ];
 
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '0 auto',
-        padding: '16px',
-        fontFamily: 'sans-serif',
-        color: '#2e1065',
-        backgroundColor: '#faf5ff',
-        minHeight: '100vh',
-      }}
-    >
-      <header style={{ textAlign: 'center', marginBottom: '24px' }}>
-        <h1 style={{ color: '#6b21a8', fontSize: '32px', margin: '0 0 8px 0' }}>
-          💜 BTS Fan Hub 💜
+    <div className="min-h-screen bg-purple-950 text-white font-sans p-4 md:p-8">
+      {/* Header */}
+      <header className="text-center py-6">
+        <h1 className="text-4xl font-extrabold flex items-center justify-center gap-2 text-pink-400">
+          <Heart className="fill-pink-400" /> BTS Fan Hub
         </h1>
-        <p style={{ margin: 0, color: '#7e22ce', fontSize: '14px' }}>
-          Bangtan Sonyeondan | ARMY Portal
-        </p>
       </header>
 
-      {/* Tabs */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '8px',
-          marginBottom: '24px',
-        }}
-      >
-        {(['members', 'songs', 'favorites'] as const).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{
-              padding: '12px 8px',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              cursor: 'pointer',
-              textTransform: 'capitalize',
-              backgroundColor: activeTab === tab ? '#7e22ce' : '#e9d5ff',
-              color: activeTab === tab ? '#fff' : '#581c87',
-              boxShadow:
-                activeTab === tab ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-            }}
-          >
-            {tab === 'favorites' ? `Favorites (${favoriteSongs.length})` : tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Tab 1: Members */}
-      {activeTab === 'members' && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-            gap: '16px',
-          }}
+      {/* Navigation Bar */}
+      <nav className="flex flex-wrap justify-center gap-2 mb-8 max-w-3xl mx-auto bg-purple-900/60 p-2 rounded-2xl shadow-lg border border-purple-800">
+        <button 
+          onClick={() => setActiveTab('members')}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition ${activeTab === 'members' ? 'bg-pink-500 text-white shadow' : 'text-purple-200 hover:bg-purple-800'}`}
         >
-          {MEMBERS.map((m) => (
-            <div
-              key={m.stageName}
-              style={{
-                border: '1px solid #d8b4fe',
-                borderRadius: '12px',
-                padding: '16px',
-                backgroundColor: '#fff',
-                boxShadow: '0 2px 4px rgba(126,34,206,0.05)',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'baseline',
-                  marginBottom: '8px',
-                }}
-              >
-                <h3 style={{ margin: 0, color: '#6b21a8', fontSize: '20px' }}>
-                  {m.stageName}
-                </h3>
-                <span
-                  style={{
-                    fontSize: '12px',
-                    color: '#9333ea',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {m.role.split(',')[0]}
-                </span>
-              </div>
-              <p
-                style={{
-                  margin: '0 0 4px 0',
-                  fontSize: '13px',
-                  color: '#4c1d95',
-                  fontWeight: 'bold',
-                }}
-              >
-                {m.name}
-              </p>
-              <p
-                style={{
-                  margin: '0 0 12px 0',
-                  fontSize: '12px',
-                  color: '#6b21a8',
-                }}
-              >
-                🎂 {m.birthDate}
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: '13px',
-                  lineHeight: '1.4',
-                  color: '#3b0764',
-                  backgroundColor: '#f3e8ff',
-                  padding: '8px',
-                  borderRadius: '6px',
-                }}
-              >
-                {m.bio}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
+          <Users size={16} /> Members
+        </button>
 
-      {/* Tab 2: Essential Discography */}
-      {activeTab === 'songs' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <h2
-            style={{ fontSize: '20px', color: '#6b21a8', margin: '0 0 8px 0' }}
-          >
-            Hit Songs & Eras
-          </h2>
-          {DISCOGRAPHY.map((song) => {
-            const isFav = favoriteSongs.includes(song.title);
-            const ytSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-              'BTS ' + song.title + ' Official MV'
-            )}`;
-            return (
-              <div
-                key={song.title}
-                style={{
-                  border: '1px solid #e9d5ff',
-                  borderRadius: '8px',
-                  padding: '12px 16px',
-                  backgroundColor: '#fff',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <div>
-                  <h3
-                    style={{
-                      margin: '0 0 4px 0',
-                      fontSize: '16px',
-                      color: '#581c87',
-                    }}
-                  >
-                    {song.title}
-                  </h3>
-                  <p style={{ margin: 0, fontSize: '12px', color: '#7e22ce' }}>
-                    {song.album} ({song.year})
-                  </p>
-                </div>
-                <div
-                  style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
-                >
-                  <a
-                    href={ytSearchUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      textDecoration: 'none',
-                      fontSize: '12px',
-                      backgroundColor: '#ef4444',
-                      color: '#fff',
-                      padding: '6px 10px',
-                      borderRadius: '6px',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Watch MV 🎬
-                  </a>
-                  <button
-                    onClick={() => toggleFavorite(song.title)}
-                    style={{
-                      border: 'none',
-                      backgroundColor: isFav ? '#9333ea' : '#f3e8ff',
-                      color: isFav ? '#fff' : '#7e22ce',
-                      padding: '6px 12px',
-                      borderRadius: '6px',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {isFav ? '💜 Saved' : '+ Fav'}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+        <button 
+          onClick={() => setActiveTab('songs')}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition ${activeTab === 'songs' ? 'bg-pink-500 text-white shadow' : 'text-purple-200 hover:bg-purple-800'}`}
+        >
+          <Music size={16} /> Songs
+        </button>
 
-      {/* Tab 3: Favorites */}
-      {activeTab === 'favorites' && (
-        <div>
-          <h2
-            style={{ fontSize: '20px', color: '#6b21a8', marginBottom: '12px' }}
-          >
-            Your Favorite Playlist
-          </h2>
-          {favoriteSongs.length === 0 ? (
-            <p style={{ color: '#7e22ce' }}>
-              No saved favorites yet! Switch to Songs and tap "+ Fav" to build
-              your list.
-            </p>
-          ) : (
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
-            >
-              {favoriteSongs.map((title) => (
-                <div
-                  key={title}
-                  style={{
-                    border: '1px solid #d8b4fe',
-                    borderRadius: '8px',
-                    padding: '12px 16px',
-                    backgroundColor: '#fff',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <span style={{ fontWeight: 'bold', color: '#6b21a8' }}>
-                    💜 {title}
-                  </span>
-                  <button
-                    onClick={() => toggleFavorite(title)}
-                    style={{
-                      border: 'none',
-                      backgroundColor: '#f3e8ff',
-                      color: '#ef4444',
-                      padding: '6px 12px',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Remove
-                  </button>
+        <button 
+          onClick={() => setActiveTab('pictures')}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition ${activeTab === 'pictures' ? 'bg-pink-500 text-white shadow' : 'text-purple-200 hover:bg-purple-800'}`}
+        >
+          <Image size={16} /> Pictures
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('videos')}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition ${activeTab === 'videos' ? 'bg-pink-500 text-white shadow' : 'text-purple-200 hover:bg-purple-800'}`}
+        >
+          <Tv size={16} /> YouTube Videos
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('news')}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition ${activeTab === 'news' ? 'bg-pink-500 text-white shadow' : 'text-purple-200 hover:bg-purple-800'}`}
+        >
+          <Newspaper size={16} /> Latest News
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('favorites')}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition ${activeTab === 'favorites' ? 'bg-pink-500 text-white shadow' : 'text-purple-200 hover:bg-purple-800'}`}
+        >
+          <Sparkles size={16} /> Favorites
+        </button>
+      </nav>
+
+      {/* Main Content Area */}
+      <main className="max-w-4xl mx-auto">
+        {/* 1. Members */}
+        {activeTab === 'members' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {members.map((member, idx) => (
+              <div key={idx} className="bg-purple-900/80 border border-purple-700/50 p-5 rounded-2xl shadow-lg">
+                <h3 className="text-xl font-bold text-pink-300">{member.name}</h3>
+                <span className="text-xs uppercase tracking-wide text-purple-300 font-semibold">{member.role}</span>
+                <p className="text-sm text-purple-100 mt-2">{member.bio}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 2. Songs */}
+        {activeTab === 'songs' && (
+          <div className="bg-purple-900/80 border border-purple-700/50 rounded-2xl p-4 shadow-lg">
+            <div className="divide-y divide-purple-800">
+              {songs.map((song, idx) => (
+                <div key={idx} className="py-3 flex justify-between items-center">
+                  <div>
+                    <h4 className="font-bold text-pink-200">{song.title}</h4>
+                    <span className="text-xs text-purple-300">{song.genre}</span>
+                  </div>
+                  <span className="text-xs font-mono bg-purple-800 px-2.5 py-1 rounded-full text-purple-200">{song.year}</span>
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+
+        {/* 3. Pictures */}
+        {activeTab === 'pictures' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {pictures.map((url, idx) => (
+              <img key={idx} src={url} alt={`BTS Photo ${idx + 1}`} className="w-full h-52 object-cover rounded-2xl shadow-lg border border-purple-700/50" />
+            ))}
+          </div>
+        )}
+
+        {/* 4. YouTube Videos */}
+        {activeTab === 'videos' && (
+          <div className="space-y-6">
+            {videoIds.map((id, idx) => (
+              <div key={idx} className="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border border-purple-700/50">
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${id}`}
+                  title="BTS YouTube Video"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 5. Latest News */}
+        {activeTab === 'news' && (
+          <div className="space-y-4">
+            {news.map((item, idx) => (
+              <div key={idx} className="bg-purple-900/80 border border-purple-700/50 p-5 rounded-2xl shadow-lg">
+                <span className="text-xs font-semibold text-pink-400">{item.date}</span>
+                <h3 className="text-xl font-bold mt-1 text-purple-100">{item.title}</h3>
+                <p className="text-sm text-purple-200 mt-2">{item.summary}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 6. Favorites */}
+        {activeTab === 'favorites' && (
+          <div className="space-y-4">
+            {favorites.map((fav, idx) => (
+              <div key={idx} className="bg-purple-900/80 border border-purple-700/50 p-5 rounded-2xl shadow-lg">
+                <h3 className="text-lg font-bold text-pink-300">{fav.title}</h3>
+                <p className="text-sm text-purple-100 mt-1">{fav.items}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
     </div>
   );
 }
+
