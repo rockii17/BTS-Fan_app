@@ -40,15 +40,15 @@ export default function App() {
     fetchLiveNews();
   }, []);
 
-  // Members Data with Reliable Unsplash Stage/Artistic Placeholders
+  // Members Data with your working custom photos
   const members = [
-    { name: 'RM', realName: 'Kim Nam-joon', role: 'Leader & Main Rapper', date: 'September 12, 1994', bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/RM_for_Dispatch_in_Las_Vegas%2C_May_2019_%281%29.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' },
-    { name: 'Jin', realName: 'Kim Seok-jin', role: 'Sub Vocalist & Visual', date: 'December 4, 1992', bio: 'The oldest member, famous for his "Worldwide Handsome" humor and soulful vocals.', img: 'https://upload.wikimedia.org/wikipedia/commons/6/64/BTS_JIN_Airport_Departure_on_20250223_03.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' },
-    { name: 'Suga / Agust D', realName: 'Min Yoon-gi', role: 'Lead Rapper & Producer', date: 'March 9, 1993', bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.', img: 'https://upload.wikimedia.org/wikipedia/commons/0/06/Suga_for_Marie_Claire_Korea%2C_May_2023_issue_12.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' },
-    { name: 'J-Hope', realName: 'Jung Ho-seok', role: 'Main Dancer & Rapper', date: 'February 18, 1994', bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/J-Hope_at_26th_Seoul_Music_Awards_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' },
-    { name: 'Jimin', realName: 'Park Ji-min', role: 'Main Dancer & Lead Vocalist', date: 'October 13, 1995', bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.', img: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Park_Ji-min_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' },
-    { name: 'V', realName: 'Kim Tae-hyung', role: 'Sub Vocalist & Visual', date: 'December 30, 1995', bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/V_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' },
-    { name: 'Jungkook', realName: 'Jeon Jung-kook', role: 'Main Vocalist & Center', date: 'September 1, 1997', bio: 'The "Golden Maknae" who excels at singing, dancing, and stage performance.', img: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Jeon_Jung-kook_accepting_the_Order_of_Cultural_Merit%2C_24_October_2018_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original' }
+    { name: 'RM', realName: 'Kim Nam-joon', role: 'Leader & Main Rapper', date: 'September 12, 1994', bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop' },
+    { name: 'Jin', realName: 'Kim Seok-jin', role: 'Sub Vocalist & Visual', date: 'December 4, 1992', bio: 'The oldest member, famous for his "Worldwide Handsome" humor and soulful vocals.', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop' },
+    { name: 'Suga / Agust D', realName: 'Min Yoon-gi', role: 'Lead Rapper & Producer', date: 'March 9, 1993', bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop' },
+    { name: 'J-Hope', realName: 'Jung Ho-seok', role: 'Main Dancer & Rapper', date: 'February 18, 1994', bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.', image: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop' },
+    { name: 'Jimin', realName: 'Park Ji-min', role: 'Main Dancer & Lead Vocalist', date: 'October 13, 1995', bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop' },
+    { name: 'V', realName: 'Kim Tae-hyung', role: 'Sub Vocalist & Visual', date: 'December 30, 1995', bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop' },
+    { name: 'Jungkook', realName: 'Jeon Jung-kook', role: 'Main Vocalist & Center', date: 'September 1, 1997', bio: 'The "Golden Maknae" who excels at singing, dancing, and stage performance.', image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&auto=format&fit=crop' }
   ];
 
   // Albums & Songs Data
@@ -78,14 +78,17 @@ export default function App() {
     }
   ];
 
-  // Dynamic User-Editable Pictures & Videos
-  const [pictures, setPictures] = useState(() => {
+  // Dynamic User Pictures with Overlapping Canvas Position Data
+  const [pictures, setPictures] = useState<Array<{ id: string; title: string; url: string; x: number; y: number; rotate: number }>>(() => {
     const saved = localStorage.getItem('bts_hub_pictures');
     return saved ? JSON.parse(saved) : [
-      { title: 'BTS Concert Stage', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop' },
-      { title: 'ARMY Bomb Ocean', url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop' }
+      { id: '1', title: 'BTS Stage', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop', x: 30, y: 30, rotate: -4 },
+      { id: '2', title: 'ARMY Ocean', url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop', x: 180, y: 70, rotate: 5 }
     ];
   });
+
+  const [activeDragId, setActiveDragId] = useState<string | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
   const [videos, setVideos] = useState(() => {
     const saved = localStorage.getItem('bts_hub_videos');
@@ -104,16 +107,21 @@ export default function App() {
     localStorage.setItem('bts_hub_videos', JSON.stringify(videos));
   }, [videos]);
 
-  // Handle Direct File Upload from Phone/Computer
+  // Handle Direct File Upload from Phone with Random Wall Position
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPictures([
-          { title: newPicTitle.trim() || file.name, url: reader.result as string },
-          ...pictures
-        ]);
+        const newPic = {
+          id: Date.now().toString(),
+          title: newPicTitle.trim() || file.name,
+          url: reader.result as string,
+          x: Math.floor(Math.random() * 120) + 20,
+          y: Math.floor(Math.random() * 120) + 20,
+          rotate: Math.floor(Math.random() * 16) - 8
+        };
+        setPictures([newPic, ...pictures]);
         setNewPicTitle('');
       };
       reader.readAsDataURL(file);
@@ -124,12 +132,55 @@ export default function App() {
   const handleAddPicture = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPicUrl.trim()) return;
-    setPictures([{ title: newPicTitle.trim() || 'BTS Photo', url: newPicUrl.trim() }, ...pictures]);
+    const newPic = {
+      id: Date.now().toString(),
+      title: newPicTitle.trim() || 'BTS Photo',
+      url: newPicUrl.trim(),
+      x: Math.floor(Math.random() * 120) + 20,
+      y: Math.floor(Math.random() * 120) + 20,
+      rotate: Math.floor(Math.random() * 16) - 8
+    };
+    setPictures([newPic, ...pictures]);
     setNewPicTitle('');
     setNewPicUrl('');
   };
 
-  // Helper to parse YouTube ID from full links or raw IDs
+  // Delete Picture Handler
+  const handleDeletePicture = (idToDelete: string) => {
+    setPictures(pictures.filter(p => p.id !== idToDelete));
+  };
+
+  // Drag Handlers for Mobile Touch & Desktop Mouse
+  const handleStartDrag = (id: string, clientX: number, clientY: number, currentX: number, currentY: number) => {
+    setActiveDragId(id);
+    setDragOffset({ x: clientX - currentX, y: clientY - currentY });
+
+    // Move dragged photo to top of stack layer
+    setPictures(prev => {
+      const target = prev.find(p => p.id === id);
+      if (!target) return prev;
+      return [...prev.filter(p => p.id !== id), target];
+    });
+  };
+
+  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!activeDragId) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+    setPictures(prev => prev.map(pic => {
+      if (pic.id === activeDragId) {
+        return { ...pic, x: clientX - dragOffset.x, y: clientY - dragOffset.y };
+      }
+      return pic;
+    }));
+  };
+
+  const handleEndDrag = () => {
+    setActiveDragId(null);
+  };
+
+  // Helper to parse YouTube ID
   const extractYoutubeId = (urlOrId: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = urlOrId.match(regExp);
@@ -197,12 +248,9 @@ export default function App() {
               {members.map((m, idx) => (
                 <div key={idx} style={styles.innerCard}>
                   <img 
-                    src={m.img} 
+                    src={m.image} 
                     alt={m.name} 
-                    style={styles.memberPhoto} 
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop';
-                    }}
+                    style={styles.memberImage}
                   />
                   <div style={{ flex: 1 }}>
                     <div style={styles.flexBetween}>
@@ -263,15 +311,18 @@ export default function App() {
             </div>
           )}
 
-          {/* PICTURES GALLERY + DIRECT FILE UPLOAD */}
+          {/* INTERACTIVE PHOTO COLLAGE WALL */}
           {activeTab === 'pictures' && (
             <div>
-              <h2 style={styles.sectionHeading}>Photo Gallery</h2>
+              <h2 style={styles.sectionHeading}>🖼️ Photo Collage Wall</h2>
+              <p style={{ fontSize: '11px', color: '#825db0', margin: '-10px 0 12px 0', fontWeight: 'bold' }}>
+                👉 Drag photos around to arrange your wall! Tap any photo to bring it to top.
+              </p>
               
               <div style={styles.addForm}>
-                <h4 style={styles.formTitle}>📷 Add a Photo</h4>
+                <h4 style={styles.formTitle}>📷 Add a Photo to Wall</h4>
                 
-                {/* Option A: Direct File Upload from Phone/Computer */}
+                {/* File Upload from Device */}
                 <div style={{ marginBottom: '14px' }}>
                   <label style={styles.fileUploadLabel}>
                     📁 Choose Photo from Phone/Device
@@ -285,10 +336,10 @@ export default function App() {
                 </div>
 
                 <div style={{ textAlign: 'center', color: '#825db0', fontSize: '11px', margin: '8px 0', fontWeight: 'bold' }}>
-                  — OR PASTE A DIRECT IMAGE LINK —
+                  — OR PASTE AN IMAGE LINK —
                 </div>
 
-                {/* Option B: Image URL Link */}
+                {/* Image URL Link */}
                 <form onSubmit={handleAddPicture} style={styles.formGrid}>
                   <input
                     type="text"
@@ -310,18 +361,50 @@ export default function App() {
                 </form>
               </div>
 
-              <div style={styles.gridTwoCols}>
-                {pictures.map((pic, idx) => (
-                  <div key={idx} style={styles.innerCard}>
+              {/* Draggable & Overlapping Picture Board */}
+              <div 
+                onMouseMove={handleDragMove}
+                onTouchMove={handleDragMove}
+                onMouseUp={handleEndDrag}
+                onTouchEnd={handleEndDrag}
+                style={styles.collageCanvas}
+              >
+                {pictures.map((pic) => (
+                  <div
+                    key={pic.id}
+                    onMouseDown={(e) => handleStartDrag(pic.id, e.clientX, e.clientY, pic.x, pic.y)}
+                    onTouchStart={(e) => handleStartDrag(pic.id, e.touches[0].clientX, e.touches[0].clientY, pic.x, pic.y)}
+                    style={{
+                      position: 'absolute',
+                      left: `${pic.x}px`,
+                      top: `${pic.y}px`,
+                      transform: `rotate(${pic.rotate}deg)`,
+                      backgroundColor: '#ffffff',
+                      padding: '8px 8px 12px 8px',
+                      borderRadius: '8px',
+                      boxShadow: '0 8px 16px rgba(0,0,0,0.18)',
+                      cursor: 'grab',
+                      userSelect: 'none',
+                      width: '160px'
+                    }}
+                  >
                     <img 
                       src={pic.url} 
                       alt={pic.title} 
-                      style={styles.galleryImage} 
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop';
-                      }}
+                      style={{ width: '100%', height: '140px', objectFit: 'cover', borderRadius: '4px', pointerEvents: 'none' }} 
                     />
-                    <p style={styles.imageCaption}>{pic.title}</p>
+                    <p style={{ margin: '6px 0 0 0', fontSize: '11px', fontWeight: 'bold', color: '#3c2263', textAlign: 'center' }}>
+                      {pic.title}
+                    </p>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePicture(pic.id);
+                      }}
+                      style={styles.deletePhotoBtn}
+                    >
+                      🗑️ Delete Photo
+                    </button>
                   </div>
                 ))}
               </div>
@@ -375,7 +458,7 @@ export default function App() {
             </div>
           )}
 
-          {/* AUTO-UPDATING LIVE NEWS */}
+          {/* LIVE NEWS */}
           {activeTab === 'news' && (
             <div>
               <div style={styles.flexBetween}>
@@ -431,7 +514,7 @@ export default function App() {
   );
 }
 
-// Inline Pure CSS Styles
+// Inline Styles
 const styles: { [key: string]: React.CSSProperties } = {
   pageBackground: {
     backgroundColor: '#f3edf7',
@@ -502,6 +585,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: '16px',
     border: '1px solid #e2d5f3'
   },
+  memberImage: {
+    width: '100%',
+    height: '240px',
+    objectFit: 'cover',
+    borderRadius: '12px',
+    marginBottom: '12px'
+  },
   flexBetween: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -540,13 +630,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: '#52416c',
     marginTop: '10px',
     lineHeight: '1.4'
-  },
-  memberPhoto: {
-    width: '100%',
-    height: '240px',
-    objectFit: 'cover',
-    borderRadius: '12px',
-    marginBottom: '12px'
   },
   actionButton: {
     width: '100%',
@@ -618,6 +701,28 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '12px',
     cursor: 'pointer'
   },
+  collageCanvas: {
+    position: 'relative',
+    width: '100%',
+    height: '560px',
+    backgroundColor: '#f1e6f9',
+    borderRadius: '16px',
+    border: '2px dashed #cbb2ea',
+    overflow: 'hidden',
+    touchAction: 'none'
+  },
+  deletePhotoBtn: {
+    width: '100%',
+    padding: '4px',
+    marginTop: '8px',
+    backgroundColor: '#ffeeee',
+    color: '#e62b4a',
+    border: '1px solid #f5c2c7',
+    borderRadius: '6px',
+    fontWeight: 'bold',
+    fontSize: '10px',
+    cursor: 'pointer'
+  },
   albumTitle: {
     margin: '0 0 12px 0',
     fontSize: '15px',
@@ -632,7 +737,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: '12px',
     border: '1px solid #ece3f7',
     display: 'flex',
-    justifyContent: 'space-between',
+    justify.content: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
     gap: '8px'
@@ -667,19 +772,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '11px',
     fontWeight: 'bold',
     cursor: 'pointer'
-  },
-  galleryImage: {
-    width: '100%',
-    height: '200px',
-    objectFit: 'cover',
-    borderRadius: '12px'
-  },
-  imageCaption: {
-    margin: '8px 0 0 0',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    color: '#3c2263',
-    textAlign: 'center'
   },
   videoContainer: {
     position: 'relative',
