@@ -737,7 +737,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: '12px',
     border: '1px solid #ece3f7',
     display: 'flex',
-    justify.content: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
     gap: '8px'
