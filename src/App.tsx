@@ -7,12 +7,11 @@ export default function App() {
   const [newsList, setNewsList] = useState<Array<{ title: string; link: string; date: string; source: string }>>([]);
   const [loadingNews, setLoadingNews] = useState(false);
 
-  // Fetch Live BTS News Automatically
+  // Auto-Fetch Live BTS News
   useEffect(() => {
     const fetchLiveNews = async () => {
       setLoadingNews(true);
       try {
-        // Fetching live BTS news via Google News RSS converted to JSON
         const response = await fetch(
           'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3DBTS%2Bkpop%26hl%3Den-US%26gl%3DUS%26ceid%3DUS%3Aen'
         );
@@ -32,35 +31,32 @@ export default function App() {
         setLoadingNews(false);
       }
     };
-
     fetchLiveNews();
   }, []);
 
-  // Member Data
+  // Members Data with Photos
   const members = [
-    { name: 'RM', realName: 'Kim Nam-joon', role: 'Leader', date: 'September 12, 1994', bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.' },
-    { name: 'Jin', realName: 'Kim Seok-jin', role: 'Sub Vocalist', date: 'December 4, 1992', bio: 'The oldest member, famous for his "Worldwide Handsome" humor and soulful vocals.' },
-    { name: 'Suga / Agust D', realName: 'Min Yoon-gi', role: 'Lead Rapper', date: 'March 9, 1993', bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.' },
-    { name: 'J-Hope', realName: 'Jung Ho-seok', role: 'Main Dancer', date: 'February 18, 1994', bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.' },
-    { name: 'Jimin', realName: 'Park Ji-min', role: 'Main Dancer', date: 'October 13, 1995', bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.' },
-    { name: 'V', realName: 'Kim Tae-hyung', role: 'Lead Dancer', date: 'December 30, 1995', bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.' },
-    { name: 'Jungkook', realName: 'Jeon Jung-kook', role: 'Main Vocalist', date: 'September 1, 1997', bio: 'The "Golden Maknae" who excels at singing, dancing, and stage performance.' }
+    { name: 'RM', realName: 'Kim Nam-joon', role: 'Leader & Main Rapper', date: 'September 12, 1994', bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop' },
+    { name: 'Jin', realName: 'Kim Seok-jin', role: 'Sub Vocalist & Visual', date: 'December 4, 1992', bio: 'The oldest member, famous for his "Worldwide Handsome" humor and soulful vocals.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop' },
+    { name: 'Suga / Agust D', realName: 'Min Yoon-gi', role: 'Lead Rapper & Producer', date: 'March 9, 1993', bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop' },
+    { name: 'J-Hope', realName: 'Jung Ho-seok', role: 'Main Dancer & Rapper', date: 'February 18, 1994', bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.', img: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop' },
+    { name: 'Jimin', realName: 'Park Ji-min', role: 'Main Dancer & Lead Vocalist', date: 'October 13, 1995', bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.', img: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop' },
+    { name: 'V', realName: 'Kim Tae-hyung', role: 'Sub Vocalist & Visual', date: 'December 30, 1995', bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop' },
+    { name: 'Jungkook', realName: 'Jeon Jung-kook', role: 'Main Vocalist & Center', date: 'September 1, 1997', bio: 'The "Golden Maknae" who excels at singing, dancing, and stage performance.', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop' }
   ];
 
-  // Songs Categorized by Album
+  // Albums & Songs Data
   const albums = [
     {
       title: 'BE (2020)',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/4/4b/BTS_-_Be_cover.png',
       tracks: [
-        { title: 'Dynamite', spotifyUrl: 'https://open.spotify.com/track/4Jy13In41R2I2oR2e', ytId: 'gdZLi9oWNZg' },
-        { title: 'Life Goes On', spotifyUrl: 'https://open.spotify.com/track/22L12I34I2oR2e', ytId: '-5q5mZbe3V8' },
+        { title: 'Dynamite', spotifyUrl: 'https://open.spotify.com/search/Dynamite%20BTS', ytId: 'gdZLi9oWNZg' },
+        { title: 'Life Goes On', spotifyUrl: 'https://open.spotify.com/search/Life%20Goes%20On%20BTS', ytId: '-5q5mZbe3V8' },
         { title: 'Blue & Grey', spotifyUrl: 'https://open.spotify.com/search/Blue%20%26%20Grey%20BTS', ytId: 'gA2I1y5o_4E' }
       ]
     },
     {
       title: 'Butter (2021)',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/d/db/BTS_-_Butter.png',
       tracks: [
         { title: 'Butter', spotifyUrl: 'https://open.spotify.com/search/Butter%20BTS', ytId: 'WMweEpGlu_U' },
         { title: 'Permission to Dance', spotifyUrl: 'https://open.spotify.com/search/Permission%20to%20Dance%20BTS', ytId: 'CuklIb9d3fI' }
@@ -68,22 +64,26 @@ export default function App() {
     },
     {
       title: 'MAP OF THE SOUL : 7 (2020)',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/2/21/BTS_-_Map_of_the_Soul_7.png',
       tracks: [
         { title: 'ON', spotifyUrl: 'https://open.spotify.com/search/ON%20BTS', ytId: 'mPVDGOVjR0U' },
         { title: 'Black Swan', spotifyUrl: 'https://open.spotify.com/search/Black%20Swan%20BTS', ytId: '0lapF4DQPKQ' },
         { title: 'Boy With Luv (feat. Halsey)', spotifyUrl: 'https://open.spotify.com/search/Boy%20With%20Luv%20BTS', ytId: 'XsX3ATc3Cg8' }
       ]
-    },
-    {
-      title: 'LOVE YOURSELF 轉 Tear (2018)',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/e/eb/BTS_-_Love_Yourself_Tear.jpg',
-      tracks: [
-        { title: 'Fake Love', spotifyUrl: 'https://open.spotify.com/search/Fake%20Love%20BTS', ytId: '7C2z4GqqS5E' },
-        { title: 'Anpanman', spotifyUrl: 'https://open.spotify.com/search/Anpanman%20BTS', ytId: '4uP1y-G3aV8' }
-      ]
     }
   ];
+
+  // Pre-loaded Gallery Pictures & Videos
+  const [pictures, setPictures] = useState([
+    { title: 'World Tour Stage', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop' },
+    { title: 'ARMY Bomb Ocean', url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop' },
+    { title: 'Live Performance', url: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc436?w=600&auto=format&fit=crop' }
+  ]);
+
+  const [videos, setVideos] = useState([
+    { title: 'Dynamite Official MV', id: 'gdZLi9oWNZg' },
+    { title: 'Butter Official MV', id: 'WMweEpGlu_U' },
+    { title: 'Boy With Luv Official MV', id: 'XsX3ATc3Cg8' }
+  ]);
 
   // Saved Favorites State
   const [userFavs, setUserFavs] = useState<string[]>(() => {
@@ -104,166 +104,462 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f3edf7] text-[#2b233d] font-sans p-4 md:p-8">
-      {/* Header Container */}
-      <div className="max-w-3xl mx-auto bg-[#eaddf7] rounded-3xl p-6 shadow-sm mb-6 text-center border border-[#d8c5f2]">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-[#6b3ba7] flex items-center justify-center gap-2">
-          💜 BTS Fan Hub 💜
-        </h1>
-        <p className="text-xs md:text-sm font-semibold text-[#825db0] mt-1">Bangtan Sonyeondan | ARMY Portal</p>
+    <div style={styles.pageBackground}>
+      <div style={styles.container}>
+        {/* Header Box */}
+        <header style={styles.headerCard}>
+          <h1 style={styles.mainTitle}>💜 BTS Fan Hub 💜</h1>
+          <p style={styles.subTitle}>Bangtan Sonyeondan | ARMY Portal</p>
 
-        {/* Navigation Tabs */}
-        <nav className="flex flex-wrap justify-center gap-2 mt-6">
-          {(['members', 'songs', 'pictures', 'videos', 'news', 'favorites'] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-5 py-2.5 rounded-2xl text-xs md:text-sm font-bold capitalize transition-all ${
-                activeTab === tab
-                  ? 'bg-[#7c43c7] text-white shadow-md'
-                  : 'bg-[#d8c5f2]/60 text-[#5a328f] hover:bg-[#d8c5f2]'
-              }`}
-            >
-              {tab === 'favorites' ? `Favorites (${userFavs.length})` : tab}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* Main Content Container */}
-      <main className="max-w-3xl mx-auto bg-[#eaddf7] rounded-3xl p-6 shadow-sm border border-[#d8c5f2]">
-        {/* MEMBERS */}
-        {activeTab === 'members' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {members.map((m, idx) => (
-              <div key={idx} className="bg-[#f8f4fc] rounded-2xl p-5 border border-[#e2d5f3] shadow-xs flex flex-col justify-between">
-                <div>
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold text-[#3c2263]">{m.name}</h3>
-                    <span className="text-[11px] font-bold text-[#825db0]">{m.role}</span>
-                  </div>
-                  <p className="text-xs font-bold text-[#4a3a63] mt-1">{m.realName}</p>
-                  <p className="text-[11px] text-[#715c8c] mt-0.5">🎫 {m.date}</p>
-                  <p className="text-xs text-[#52416c] mt-3 bg-[#eedffc] p-3 rounded-xl leading-relaxed">{m.bio}</p>
-                </div>
-                <button
-                  onClick={() => toggleFavorite(m.name)}
-                  className={`mt-3 w-full py-1.5 rounded-xl text-xs font-bold transition ${
-                    userFavs.includes(m.name) ? 'bg-[#7c43c7] text-white' : 'bg-[#e2d5f3] text-[#5a328f]'
-                  }`}
-                >
-                  {userFavs.includes(m.name) ? '♥ Favorited' : '+ Favorite Member'}
-                </button>
-              </div>
+          {/* Navigation Bar */}
+          <nav style={styles.navGrid}>
+            {(['members', 'songs', 'pictures', 'videos', 'news', 'favorites'] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                style={{
+                  ...styles.navButton,
+                  ...(activeTab === tab ? styles.activeNavButton : {})
+                }}
+              >
+                {tab === 'favorites' ? `Favorites (${userFavs.length})` : tab.toUpperCase()}
+              </button>
             ))}
-          </div>
-        )}
+          </nav>
+        </header>
 
-        {/* SONGS ORGANIZED BY ALBUM */}
-        {activeTab === 'songs' && (
-          <div className="space-y-6">
-            <h2 className="text-center font-bold text-[#5a328f] text-sm">Discography & Tracklists</h2>
-            {albums.map((album, aIdx) => (
-              <div key={aIdx} className="bg-[#f8f4fc] rounded-2xl p-4 border border-[#e2d5f3]">
-                <h3 className="text-base font-extrabold text-[#3c2263] border-b border-[#e2d5f3] pb-2 mb-3">
-                  💿 {album.title}
-                </h3>
-                <div className="space-y-2">
-                  {album.tracks.map((track, tIdx) => (
-                    <div key={tIdx} className="bg-white p-3 rounded-xl border border-[#ece3f7] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                      <span className="text-xs font-bold text-[#4a3a63]">🎵 {track.title}</span>
-                      <div className="flex items-center gap-2 w-full sm:w-auto">
-                        <a
-                          href={`https://www.youtube.com/watch?v=${track.ytId}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="bg-[#e62b4a] hover:bg-[#cc213e] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-xs transition"
-                        >
-                          ▶ Play Video
-                        </a>
-                        <a
-                          href={track.spotifyUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="bg-[#1db954] hover:bg-[#1aa34a] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-xs transition"
-                        >
-                          🎧 Spotify
-                        </a>
-                        <button
-                          onClick={() => toggleFavorite(track.title)}
-                          className={`text-[11px] font-bold px-2.5 py-1.5 rounded-lg transition ${
-                            userFavs.includes(track.title) ? 'bg-[#7c43c7] text-white' : 'bg-[#e2d5f3] text-[#5a328f]'
-                          }`}
-                        >
-                          {userFavs.includes(track.title) ? '♥' : '+ Fav'}
-                        </button>
-                      </div>
+        {/* Content Box */}
+        <main style={styles.contentCard}>
+          {/* MEMBERS */}
+          {activeTab === 'members' && (
+            <div style={styles.gridTwoCols}>
+              {members.map((m, idx) => (
+                <div key={idx} style={styles.innerCard}>
+                  <img src={m.img} alt={m.name} style={styles.memberPhoto} />
+                  <div style={{ flex: 1 }}>
+                    <div style={styles.flexBetween}>
+                      <h3 style={styles.cardTitle}>{m.name}</h3>
+                      <span style={styles.roleBadge}>{m.role}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* AUTOMATIC LIVE NEWS */}
-        {activeTab === 'news' && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="font-bold text-[#5a328f] text-sm">Latest Live Feed</h2>
-              <span className="text-[10px] bg-[#d8c5f2] text-[#5a328f] px-2 py-0.5 rounded-full font-bold">Auto-Updated</span>
-            </div>
-
-            {loadingNews ? (
-              <p className="text-center text-xs text-[#825db0] py-8 animate-pulse">Fetching latest BTS news...</p>
-            ) : newsList.length === 0 ? (
-              <p className="text-center text-xs text-[#825db0] py-8">No live news found right now. Check back shortly!</p>
-            ) : (
-              newsList.map((item, idx) => (
-                <div key={idx} className="bg-[#f8f4fc] p-4 rounded-2xl border border-[#e2d5f3] hover:border-[#cbb3ed] transition">
-                  <div className="flex justify-between items-center text-[10px] text-[#825db0] font-bold">
-                    <span>{item.source}</span>
-                    <span>{item.date}</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-[#3c2263] mt-1">{item.title}</h3>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-block mt-2 text-xs font-bold text-[#7c43c7] hover:underline"
-                  >
-                    Read full story →
-                  </a>
-                </div>
-              ))
-            )}
-          </div>
-        )}
-
-        {/* FAVORITES */}
-        {activeTab === 'favorites' && (
-          <div>
-            <h3 className="text-center font-bold text-[#5a328f] mb-4 text-sm">Saved Items ({userFavs.length})</h3>
-            {userFavs.length === 0 ? (
-              <p className="text-center text-xs text-[#825db0] py-8">No favorites added yet!</p>
-            ) : (
-              <div className="space-y-2">
-                {userFavs.map((item, idx) => (
-                  <div key={idx} className="bg-[#f8f4fc] p-3 rounded-2xl border border-[#e2d5f3] flex justify-between items-center">
-                    <span className="text-xs font-bold text-[#3c2263]">💜 {item}</span>
+                    <p style={styles.realName}>{m.realName}</p>
+                    <p style={styles.dateText}>🎫 {m.date}</p>
+                    <p style={styles.bioBox}>{m.bio}</p>
                     <button
-                      onClick={() => toggleFavorite(item)}
-                      className="text-[11px] font-bold text-[#e62b4a] hover:underline"
+                      onClick={() => toggleFavorite(m.name)}
+                      style={{
+                        ...styles.actionButton,
+                        ...(userFavs.includes(m.name) ? styles.favActiveBtn : styles.favInactiveBtn)
+                      }}
                     >
-                      Remove
+                      {userFavs.includes(m.name) ? '♥ Favorited' : '+ Favorite Member'}
                     </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* SONGS BY ALBUM */}
+          {activeTab === 'songs' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <h2 style={styles.sectionHeading}>Discography & Tracklists</h2>
+              {albums.map((album, aIdx) => (
+                <div key={aIdx} style={styles.innerCard}>
+                  <h3 style={styles.albumTitle}>💿 {album.title}</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {album.tracks.map((track, tIdx) => (
+                      <div key={tIdx} style={styles.trackRow}>
+                        <span style={styles.trackTitle}>🎵 {track.title}</span>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                          <a href={`https://www.youtube.com/watch?v=${track.ytId}`} target="_blank" rel="noreferrer" style={styles.playMvBtn}>
+                            ▶ Watch MV
+                          </a>
+                          <a href={track.spotifyUrl} target="_blank" rel="noreferrer" style={styles.spotifyBtn}>
+                            🎧 Spotify
+                          </a>
+                          <button
+                            onClick={() => toggleFavorite(track.title)}
+                            style={{
+                              ...styles.smallFavBtn,
+                              ...(userFavs.includes(track.title) ? styles.favActiveBtn : styles.favInactiveBtn)
+                            }}
+                          >
+                            {userFavs.includes(track.title) ? '♥ Saved' : '+ Fav'}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* PICTURES GALLERY */}
+          {activeTab === 'pictures' && (
+            <div>
+              <h2 style={styles.sectionHeading}>Photo Gallery</h2>
+              <div style={styles.gridTwoCols}>
+                {pictures.map((pic, idx) => (
+                  <div key={idx} style={styles.innerCard}>
+                    <img src={pic.url} alt={pic.title} style={styles.galleryImage} />
+                    <p style={styles.imageCaption}>{pic.title}</p>
                   </div>
                 ))}
               </div>
-            )}
-          </div>
-        )}
-      </main>
+            </div>
+          )}
+
+          {/* YOUTUBE VIDEOS */}
+          {activeTab === 'videos' && (
+            <div>
+              <h2 style={styles.sectionHeading}>Featured Videos & Music Videos</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {videos.map((vid, idx) => (
+                  <div key={idx} style={styles.innerCard}>
+                    <h3 style={styles.cardTitle}>{vid.title}</h3>
+                    <div style={styles.videoContainer}>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${vid.id}`}
+                        title={vid.title}
+                        style={styles.iframe}
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* AUTO-UPDATING LIVE NEWS */}
+          {activeTab === 'news' && (
+            <div>
+              <div style={styles.flexBetween}>
+                <h2 style={styles.sectionHeading}>Latest Live Headlines</h2>
+                <span style={styles.liveBadge}>Auto-Updated</span>
+              </div>
+              {loadingNews ? (
+                <p style={styles.emptyText}>Loading latest news stories...</p>
+              ) : newsList.length === 0 ? (
+                <p style={styles.emptyText}>No news available right now.</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {newsList.map((item, idx) => (
+                    <div key={idx} style={styles.innerCard}>
+                      <div style={styles.flexBetween}>
+                        <span style={styles.newsSource}>{item.source}</span>
+                        <span style={styles.newsDate}>{item.date}</span>
+                      </div>
+                      <h3 style={styles.newsTitle}>{item.title}</h3>
+                      <a href={item.link} target="_blank" rel="noreferrer" style={styles.newsLink}>
+                        Read full article →
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* FAVORITES */}
+          {activeTab === 'favorites' && (
+            <div>
+              <h2 style={styles.sectionHeading}>Your Saved Favorites ({userFavs.length})</h2>
+              {userFavs.length === 0 ? (
+                <p style={styles.emptyText}>No favorites added yet!</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {userFavs.map((item, idx) => (
+                    <div key={idx} style={styles.favRow}>
+                      <span style={{ fontWeight: 'bold', color: '#3c2263' }}>💜 {item}</span>
+                      <button onClick={() => toggleFavorite(item)} style={styles.removeBtn}>
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
+
+// Inline Pure CSS Styles
+const styles: { [key: string]: React.CSSProperties } = {
+  pageBackground: {
+    backgroundColor: '#f3edf7',
+    minHeight: '100vh',
+    padding: '24px 16px',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
+    color: '#2b233d'
+  },
+  container: {
+    maxWidth: '750px',
+    margin: '0 auto'
+  },
+  headerCard: {
+    backgroundColor: '#eaddf7',
+    borderRadius: '24px',
+    padding: '24px',
+    border: '1px solid #d8c5f2',
+    textAlign: 'center',
+    marginBottom: '20px'
+  },
+  mainTitle: {
+    margin: 0,
+    fontSize: '28px',
+    fontWeight: '800',
+    color: '#6b3ba7'
+  },
+  subTitle: {
+    margin: '6px 0 0 0',
+    fontSize: '13px',
+    fontWeight: '600',
+    color: '#825db0'
+  },
+  navGrid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '8px',
+    marginTop: '20px'
+  },
+  navButton: {
+    backgroundColor: 'rgba(216, 197, 242, 0.6)',
+    color: '#5a328f',
+    border: 'none',
+    padding: '10px 16px',
+    borderRadius: '16px',
+    fontWeight: 'bold',
+    fontSize: '12px',
+    cursor: 'pointer'
+  },
+  activeNavButton: {
+    backgroundColor: '#7c43c7',
+    color: '#ffffff'
+  },
+  contentCard: {
+    backgroundColor: '#eaddf7',
+    borderRadius: '24px',
+    padding: '24px',
+    border: '1px solid #d8c5f2'
+  },
+  gridTwoCols: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '16px'
+  },
+  innerCard: {
+    backgroundColor: '#f8f4fc',
+    borderRadius: '16px',
+    padding: '16px',
+    border: '1px solid #e2d5f3'
+  },
+  flexBetween: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  cardTitle: {
+    margin: 0,
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#3c2263'
+  },
+  roleBadge: {
+    fontSize: '11px',
+    fontWeight: 'bold',
+    color: '#825db0',
+    backgroundColor: '#eedffc',
+    padding: '2px 8px',
+    borderRadius: '10px'
+  },
+  realName: {
+    margin: '4px 0 0 0',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#4a3a63'
+  },
+  dateText: {
+    margin: '4px 0 0 0',
+    fontSize: '11px',
+    color: '#715c8c'
+  },
+  bioBox: {
+    backgroundColor: '#eedffc',
+    padding: '10px',
+    borderRadius: '12px',
+    fontSize: '12px',
+    color: '#52416c',
+    marginTop: '10px',
+    lineHeight: '1.4'
+  },
+  memberPhoto: {
+    width: '100%',
+    height: '180px',
+    objectFit: 'cover',
+    borderRadius: '12px',
+    marginBottom: '12px'
+  },
+  actionButton: {
+    width: '100%',
+    padding: '8px',
+    borderRadius: '12px',
+    border: 'none',
+    fontWeight: 'bold',
+    fontSize: '12px',
+    cursor: 'pointer',
+    marginTop: '12px'
+  },
+  favActiveBtn: {
+    backgroundColor: '#7c43c7',
+    color: '#ffffff'
+  },
+  favInactiveBtn: {
+    backgroundColor: '#e2d5f3',
+    color: '#5a328f'
+  },
+  sectionHeading: {
+    margin: '0 0 16px 0',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#5a328f'
+  },
+  albumTitle: {
+    margin: '0 0 12px 0',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    color: '#3c2263',
+    borderBottom: '1px solid #e2d5f3',
+    paddingBottom: '8px'
+  },
+  trackRow: {
+    backgroundColor: '#ffffff',
+    padding: '12px',
+    borderRadius: '12px',
+    border: '1px solid #ece3f7',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '8px'
+  },
+  trackTitle: {
+    fontSize: '13px',
+    fontWeight: 'bold',
+    color: '#4a3a63'
+  },
+  playMvBtn: {
+    backgroundColor: '#e62b4a',
+    color: '#ffffff',
+    padding: '6px 12px',
+    borderRadius: '8px',
+    textDecoration: 'none',
+    fontSize: '11px',
+    fontWeight: 'bold'
+  },
+  spotifyBtn: {
+    backgroundColor: '#1db954',
+    color: '#ffffff',
+    padding: '6px 12px',
+    borderRadius: '8px',
+    textDecoration: 'none',
+    fontSize: '11px',
+    fontWeight: 'bold'
+  },
+  smallFavBtn: {
+    padding: '6px 12px',
+    borderRadius: '8px',
+    border: 'none',
+    fontSize: '11px',
+    fontWeight: 'bold',
+    cursor: 'pointer'
+  },
+  galleryImage: {
+    width: '100%',
+    height: '200px',
+    objectFit: 'cover',
+    borderRadius: '12px'
+  },
+  imageCaption: {
+    margin: '8px 0 0 0',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#3c2263',
+    textAlign: 'center'
+  },
+  videoContainer: {
+    position: 'relative',
+    paddingBottom: '56.25%',
+    height: 0,
+    overflow: 'hidden',
+    borderRadius: '12px',
+    marginTop: '10px'
+  },
+  iframe: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    border: 'none'
+  },
+  liveBadge: {
+    fontSize: '10px',
+    backgroundColor: '#d8c5f2',
+    color: '#5a328f',
+    padding: '2px 8px',
+    borderRadius: '10px',
+    fontWeight: 'bold'
+  },
+  newsTitle: {
+    margin: '8px 0 0 0',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    color: '#3c2263'
+  },
+  newsSource: {
+    fontSize: '10px',
+    fontWeight: 'bold',
+    color: '#825db0'
+  },
+  newsDate: {
+    fontSize: '10px',
+    color: '#825db0'
+  },
+  newsLink: {
+    display: 'inline-block',
+    marginTop: '8px',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#7c43c7',
+    textDecoration: 'none'
+  },
+  favRow: {
+    backgroundColor: '#f8f4fc',
+    padding: '12px',
+    borderRadius: '12px',
+    border: '1px solid #e2d5f3',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  removeBtn: {
+    background: 'none',
+    border: 'none',
+    color: '#e62b4a',
+    fontWeight: 'bold',
+    fontSize: '11px',
+    cursor: 'pointer'
+  },
+  emptyText: {
+    textAlign: 'center',
+    fontSize: '12px',
+    color: '#825db0',
+    padding: '24px 0'
+  }
+};
