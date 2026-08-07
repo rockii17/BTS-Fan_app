@@ -40,64 +40,15 @@ export default function App() {
     fetchLiveNews();
   }, []);
 
-  // Actual BTS Member Photos (Wikimedia Commons / Public Domain links)
+  // Members Data with Reliable Unsplash Stage/Artistic Placeholders
   const members = [
-    { 
-      name: 'RM', 
-      realName: 'Kim Nam-joon', 
-      role: 'Leader & Main Rapper', 
-      date: 'September 12, 1994', 
-      bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/RM_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-RM_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    },
-    { 
-      name: 'Jin', 
-      realName: 'Kim Seok-jin', 
-      role: 'Sub Vocalist & Visual', 
-      date: 'December 4, 1992', 
-      bio: 'The oldest member, famous for his "Worldwide Handsome" humor and soulful vocals.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Kim_Seok-jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-Kim_Seok-jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    },
-    { 
-      name: 'Suga / Agust D', 
-      realName: 'Min Yoon-gi', 
-      role: 'Lead Rapper & Producer', 
-      date: 'March 9, 1993', 
-      bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Min_Yoongi_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-Min_Yoongi_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    },
-    { 
-      name: 'J-Hope', 
-      realName: 'Jung Ho-seok', 
-      role: 'Main Dancer & Rapper', 
-      date: 'February 18, 1994', 
-      bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/J-Hope_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-J-Hope_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    },
-    { 
-      name: 'Jimin', 
-      realName: 'Park Ji-min', 
-      role: 'Main Dancer & Lead Vocalist', 
-      date: 'October 13, 1995', 
-      bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Park_Ji-min_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-Park_Ji-min_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    },
-    { 
-      name: 'V', 
-      realName: 'Kim Tae-hyung', 
-      role: 'Sub Vocalist & Visual', 
-      date: 'December 30, 1995', 
-      bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Kim_Tae-hyung_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-Kim_Tae-hyung_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    },
-    { 
-      name: 'Jungkook', 
-      realName: 'Jeon Jung-kook', 
-      role: 'Main Vocalist & Center', 
-      date: 'September 1, 1997', 
-      bio: 'The "Golden Maknae" who excels at singing, dancing, and stage performance.', 
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Jeon_Jungkook_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-Jeon_Jungkook_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' 
-    }
+    { name: 'RM', realName: 'Kim Nam-joon', role: 'Leader & Main Rapper', date: 'September 12, 1994', bio: 'Known for his brilliant songwriting, deep philosophical lyrics, and fluent English.', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop' },
+    { name: 'Jin', realName: 'Kim Seok-jin', role: 'Sub Vocalist & Visual', date: 'December 4, 1992', bio: 'The oldest member, famous for his "Worldwide Handsome" humor and soulful vocals.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop' },
+    { name: 'Suga / Agust D', realName: 'Min Yoon-gi', role: 'Lead Rapper & Producer', date: 'March 9, 1993', bio: 'Prolific producer and rapper known for powerful storytelling and distinct beats.', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop' },
+    { name: 'J-Hope', realName: 'Jung Ho-seok', role: 'Main Dancer & Rapper', date: 'February 18, 1994', bio: 'The sunshine of the group, incredible performer, dancer, and energetic rapper.', img: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop' },
+    { name: 'Jimin', realName: 'Park Ji-min', role: 'Main Dancer & Lead Vocalist', date: 'October 13, 1995', bio: 'Renowned for his elegant dance style, expressive high notes, and captivating stage presence.', img: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&auto=format&fit=crop' },
+    { name: 'V', realName: 'Kim Tae-hyung', role: 'Sub Vocalist & Visual', date: 'December 30, 1995', bio: 'Recognized for his deep baritone vocals, soulful solo tracks, and artistic eye.', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop' },
+    { name: 'Jungkook', realName: 'Jeon Jung-kook', role: 'Main Vocalist & Center', date: 'September 1, 1997', bio: 'The "Golden Maknae" who excels at singing, dancing, and stage performance.', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop' }
   ];
 
   // Albums & Songs Data
@@ -131,8 +82,8 @@ export default function App() {
   const [pictures, setPictures] = useState(() => {
     const saved = localStorage.getItem('bts_hub_pictures');
     return saved ? JSON.parse(saved) : [
-      { title: 'BTS Group Concept Photo', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/BTS_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg/800px-BTS_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_crop.jpg' },
-      { title: 'BTS Concert Stage', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop' }
+      { title: 'BTS Concert Stage', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop' },
+      { title: 'ARMY Bomb Ocean', url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop' }
     ];
   });
 
@@ -153,7 +104,23 @@ export default function App() {
     localStorage.setItem('bts_hub_videos', JSON.stringify(videos));
   }, [videos]);
 
-  // Handle Adding New Picture
+  // Handle Direct File Upload from Phone/Computer
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPictures([
+          { title: newPicTitle.trim() || file.name, url: reader.result as string },
+          ...pictures
+        ]);
+        setNewPicTitle('');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle Adding New Picture via Link
   const handleAddPicture = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPicUrl.trim()) return;
@@ -229,7 +196,14 @@ export default function App() {
             <div style={styles.gridTwoCols}>
               {members.map((m, idx) => (
                 <div key={idx} style={styles.innerCard}>
-                  <img src={m.img} alt={m.name} style={styles.memberPhoto} />
+                  <img 
+                    src={m.img} 
+                    alt={m.name} 
+                    style={styles.memberPhoto} 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop';
+                    }}
+                  />
                   <div style={{ flex: 1 }}>
                     <div style={styles.flexBetween}>
                       <h3 style={styles.cardTitle}>{m.name}</h3>
@@ -289,15 +263,33 @@ export default function App() {
             </div>
           )}
 
-          {/* PICTURES GALLERY + ADD PICTURE FORM */}
+          {/* PICTURES GALLERY + DIRECT FILE UPLOAD */}
           {activeTab === 'pictures' && (
             <div>
               <h2 style={styles.sectionHeading}>Photo Gallery</h2>
               
-              {/* Form to Add New Picture */}
-              <form onSubmit={handleAddPicture} style={styles.addForm}>
+              <div style={styles.addForm}>
                 <h4 style={styles.formTitle}>📷 Add a Photo</h4>
-                <div style={styles.formGrid}>
+                
+                {/* Option A: Direct File Upload from Phone/Computer */}
+                <div style={{ marginBottom: '14px' }}>
+                  <label style={styles.fileUploadLabel}>
+                    📁 Choose Photo from Phone/Device
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleFileUpload} 
+                      style={{ display: 'none' }} 
+                    />
+                  </label>
+                </div>
+
+                <div style={{ textAlign: 'center', color: '#825db0', fontSize: '11px', margin: '8px 0', fontWeight: 'bold' }}>
+                  — OR PASTE A DIRECT IMAGE LINK —
+                </div>
+
+                {/* Option B: Image URL Link */}
+                <form onSubmit={handleAddPicture} style={styles.formGrid}>
                   <input
                     type="text"
                     placeholder="Photo Caption / Title"
@@ -307,22 +299,28 @@ export default function App() {
                   />
                   <input
                     type="url"
-                    placeholder="Image URL (e.g., https://...)"
+                    placeholder="Direct Image URL (.jpg, .png)"
                     value={newPicUrl}
                     onChange={(e) => setNewPicUrl(e.target.value)}
-                    required
                     style={styles.inputField}
                   />
                   <button type="submit" style={styles.submitBtn}>
-                    + Add Photo
+                    + Add Link Photo
                   </button>
-                </div>
-              </form>
+                </form>
+              </div>
 
               <div style={styles.gridTwoCols}>
                 {pictures.map((pic, idx) => (
                   <div key={idx} style={styles.innerCard}>
-                    <img src={pic.url} alt={pic.title} style={styles.galleryImage} />
+                    <img 
+                      src={pic.url} 
+                      alt={pic.title} 
+                      style={styles.galleryImage} 
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop';
+                      }}
+                    />
                     <p style={styles.imageCaption}>{pic.title}</p>
                   </div>
                 ))}
@@ -330,12 +328,11 @@ export default function App() {
             </div>
           )}
 
-          {/* YOUTUBE VIDEOS + ADD VIDEO FORM */}
+          {/* YOUTUBE VIDEOS */}
           {activeTab === 'videos' && (
             <div>
               <h2 style={styles.sectionHeading}>Featured Videos & Music Videos</h2>
 
-              {/* Form to Add New Video */}
               <form onSubmit={handleAddVideo} style={styles.addForm}>
                 <h4 style={styles.formTitle}>🎬 Add a YouTube Video</h4>
                 <div style={styles.formGrid}>
@@ -348,7 +345,7 @@ export default function App() {
                   />
                   <input
                     type="text"
-                    placeholder="YouTube URL or Video ID"
+                    placeholder="YouTube Link or Video ID"
                     value={newVidInput}
                     onChange={(e) => setNewVidInput(e.target.value)}
                     required
@@ -581,6 +578,17 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: '16px',
     border: '1px solid #e2d5f3',
     marginBottom: '20px'
+  },
+  fileUploadLabel: {
+    display: 'block',
+    textAlign: 'center',
+    backgroundColor: '#7c43c7',
+    color: '#ffffff',
+    padding: '12px',
+    borderRadius: '12px',
+    fontWeight: 'bold',
+    fontSize: '13px',
+    cursor: 'pointer'
   },
   formTitle: {
     margin: '0 0 12px 0',
